@@ -20,7 +20,7 @@ CREATE TABLE question_follows (
     question_id INTEGER,
 
     FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (question_id) REFERENCES questions(question_id),
+    FOREIGN KEY (question_id) REFERENCES questions(question_id)
 );
 
 CREATE TABLE replies (
@@ -32,7 +32,7 @@ CREATE TABLE replies (
 
     FOREIGN KEY (subject_question_id) REFERENCES questions(question_id),
     FOREIGN KEY (parent_reply_id) REFERENCES replies(reply_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE question_likes (
@@ -40,9 +40,23 @@ CREATE TABLE question_likes (
     question_id INTEGER,
 
     FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (question_id) REFERENCES questions(question_id),
-)
+    FOREIGN KEY (question_id) REFERENCES questions(question_id)
+);
 
 INSERT INTO
-    
+    users (fname, lname)
 VALUES
+    ('michelle', 'li'),
+    ('jeffrey', 'ferrer');
+
+INSERT INTO
+    questions (title, body, author_id)
+VALUES
+    ("What is 2 + 2?", "I hate math", (SELECT user_id FROM users WHERE fname = "michelle")),
+
+    ("What is the best city in the world?", "not new york :(", (SELECT user_id FROM users WHERE fname = "jeffrey"));
+
+
+
+
+
